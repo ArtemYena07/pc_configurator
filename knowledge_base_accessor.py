@@ -15,7 +15,7 @@ class DataBaseAccessor:
                                  'INNER JOIN cpu ON cpu_availability.cpu_id=cpu.id ' +
                                  'INNER JOIN retailer_point ON cpu_availability.retailer_point_id=retailer_point.id ' +
                                  'WHERE core_number >= ? AND frequency >= ? ' +
-                                 'AND quantity >= 0 ORDER BY price',
+                                 'AND quantity > 0 ORDER BY price',
                                  core_number, frequency)
                 tup = rs.fetchone()
                 if not tup:
@@ -27,7 +27,7 @@ class DataBaseAccessor:
                                  'INNER JOIN cpu ON cpu_availability.cpu_id=cpu.id ' +
                                  'INNER JOIN retailer_point ON cpu_availability.retailer_point_id=retailer_point.id ' +
                                  'WHERE core_number >= ? AND frequency >= ? AND city = ? ' +
-                                 'AND quantity >= 0 ORDER BY price',
+                                 'AND quantity > 0 ORDER BY price',
                                  core_number, frequency, city)
                 tup = rs.fetchone()
                 if not tup:
@@ -44,7 +44,7 @@ class DataBaseAccessor:
                                  'INNER JOIN retailer_point ON gpu_availability.retailer_point_id=retailer_point.id ' +
                                  'INNER JOIN memory_type ON gpu.memory_type_id=memory_type.id ' +
                                  'WHERE memory_size >= ? AND memory_type.name = ? ' +
-                                 'AND quantity >= 0  ORDER BY price',
+                                 'AND quantity > 0  ORDER BY price',
                                  memory_size, memory_type)
                 tup = rs.fetchone()
                 if not tup:
@@ -56,7 +56,7 @@ class DataBaseAccessor:
                                  'INNER JOIN gpu ON gpu_availability.gpu_id=gpu.id ' +
                                  'INNER JOIN retailer_point ON gpu_availability.retailer_point_id=retailer_point.id ' +
                                  'INNER JOIN memory_type ON gpu.memory_type_id=memory_type.id ' +
-                                 'WHERE memory_size >= ? AND memory_type.name = ?  AND quantity >= 0 ' +
+                                 'WHERE memory_size >= ? AND memory_type.name = ?  AND quantity > 0 ' +
                                  'AND city = ? ORDER BY price',
                                  memory_size, memory_type, city)
                 tup = rs.fetchone()
@@ -73,7 +73,7 @@ class DataBaseAccessor:
                                  'INNER JOIN ram ON ram_availability.ram_id=ram.id ' +
                                  'INNER JOIN retailer_point ON ram_availability.retailer_point_id=retailer_point.id ' +
                                  'INNER JOIN memory_type ON ram.memory_type_id=memory_type.id ' +
-                                 'WHERE memory_size >= ? AND memory_type.name = ? AND quantity >= 0 ' +
+                                 'WHERE memory_size >= ? AND memory_type.name = ? AND quantity > 0 ' +
                                  'AND frequency >= ? ORDER BY price',
                                  memory_size, memory_type, frequency)
                 tup = rs.fetchone()
@@ -87,7 +87,7 @@ class DataBaseAccessor:
                                  'INNER JOIN retailer_point ON ram_availability.retailer_point_id=retailer_point.id ' +
                                  'INNER JOIN memory_type ON ram.memory_type_id=memory_type.id ' +
                                  'WHERE memory_size >= ? AND memory_type.name = ? ' +
-                                 'AND frequency >= ? AND city = ? AND quantity >= 0 ORDER BY price',
+                                 'AND frequency >= ? AND city = ? AND quantity > 0 ORDER BY price',
                                  memory_size, memory_type, frequency, city)
                 tup = rs.fetchone()
                 if not tup:
@@ -101,7 +101,7 @@ class DataBaseAccessor:
                 rs = con.execute('SELECT memory_size, price, producer_id, retailer_id, city, address  FROM ssd_availability ' +
                                  'INNER JOIN retailer_point ON ssd_availability.retailer_point_id=retailer_point.id ' +
                                  'INNER JOIN ssd ON ssd_availability.ssd_id=ssd.id ' +
-                                 'WHERE memory_size >= ? AND quantity >= 0 ORDER BY price',
+                                 'WHERE memory_size >= ? AND quantity > 0 ORDER BY price',
                                  memory_size)
                 tup = rs.fetchone()
                 if not tup:
@@ -112,7 +112,7 @@ class DataBaseAccessor:
                 rs = con.execute('SELECT memory_size, price, producer_id, retailer_id, city, address  FROM ssd_availability ' +
                                  'INNER JOIN retailer_point ON ssd_availability.retailer_point_id=retailer_point.id ' +
                                  'INNER JOIN ssd ON ssd_availability.ssd_id=ssd.id ' +
-                                 'WHERE memory_size >= ? AND city = ? AND quantity >= 0 ORDER BY price',
+                                 'WHERE memory_size >= ? AND city = ? AND quantity > 0 ORDER BY price',
                                  memory_size, city)
                 tup = rs.fetchone()
                 if not tup:
